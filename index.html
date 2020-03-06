@@ -1,1 +1,167 @@
+<!doctype html>
+<html lang="en">
 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Password Generator</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid text-center text-white" style="background-color:#00558D;">
+        <div class="container">
+            <h1 class="display-4 horizontal-center">Password Generator</h1>
+            <p class="lead">1Password and LastPass are now quaking in their boots!</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 100%;">
+                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/13/1f/88/131f883b-2951-edf1-b8c2-d5a7acfe2ee9/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/1024x1024bb.png"
+                        class="card-img-top mx-auto" alt="Lock icon" style="max-width: 256px">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <p class="card-text">
+                                Enter your password requirements and then press the button to generate a password.
+                            </p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <label class="float-left" for="fname">Lowercase characters:</label>
+                                    <input class="float-right" type="number"
+                                        onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190"
+                                        id="lowercaseNumber" min="0" max="128" step="1" value="0"
+                                        data-bind="value:lowercaseNumber" />
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="float-left" for="fname">Uppercase characters:</label>
+                                    <input class="float-right" type="number"
+                                        onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190"
+                                        id="uppercaseNumber" min="0" max="128" step="1" value="0"
+                                        data-bind="value:uppercaseNumber" />
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="float-left" for="fname">Number characters:</label>
+                                    <input class="float-right" type="number"
+                                        onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190"
+                                        id="numberNumber" min="0" max="128" step="1" value="0"
+                                        data-bind="value:numberNumber" />
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="float-left" for="fname">Special characters:</label>
+                                    <input class="float-right" type="number"
+                                        onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190"
+                                        id="specialNumber" min="0" max="128" step="1" value="0"
+                                        data-bind="value:specialNumber" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn text-center text-white" onclick="passwordValidation()"
+                                style="background-color:#054368;">
+                                Generate Password
+                            </button>
+                            <pre><textarea readonly id="generated-password" style="text-align:center; border: none; margin: auto; width:100%" ></textarea></pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Password error!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <pre id="currentLength" style="white-space: pre-wrap;"></pre>
+                        <pre style="white-space: pre-wrap;">Your password must be between 8 and 128 characters.</pre>
+                        <pre>Please try again.</pre>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn text-white" data-dismiss="modal"
+                            style="background-color:#054368;">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var numbers = '0123456789';
+        var special = '!#$%&()*+,-./:;<=>?@^_`{|}~';
+
+        function passwordValidation() {
+            var lowercaseNumber = document.querySelectorAll('[data-bind]')[0].valueAsNumber;
+            var uppercaseNumber = document.querySelectorAll('[data-bind]')[1].valueAsNumber;
+            var numberNumber = document.querySelectorAll('[data-bind]')[2].valueAsNumber;
+            var specialNumber = document.querySelectorAll('[data-bind]')[3].valueAsNumber;
+            var passwordLength = (lowercaseNumber + uppercaseNumber + numberNumber + specialNumber);
+            if (passwordLength > 128 || passwordLength < 8) {
+                document.querySelector("#currentLength").innerHTML = `Your current password length is ${lowercaseNumber + uppercaseNumber + numberNumber + specialNumber}.`;
+                $('#exampleModal').modal("show")
+            }
+            else {
+                generatePassword(passwordLength, lowercaseNumber, uppercaseNumber, numberNumber, specialNumber)
+            }
+        }
+        function getRandom(arr) {
+            var randIndex = Math.floor(Math.random() * arr.length);
+            var randElement = arr[randIndex];
+
+            return randElement;
+        }
+
+        function shuffleString(string) {
+            var array = string.split('');
+            array.sort(() => Math.random() - 0.5);
+            return array.join("");
+        }
+
+        function generatePassword(passwordLength, passwordLowercase, passwordUppercase, passwordNumbers, passwordSpecial) {
+            var thePassword = "";
+            for (var i = 0; i < passwordLowercase; i++) {
+                thePassword += getRandom(lowercase);
+            }
+            for (var i = 0; i < passwordUppercase; i++) {
+                thePassword += getRandom(uppercase);
+            }
+            for (var i = 0; i < passwordNumbers; i++) {
+                thePassword += getRandom(numbers);
+            }
+            for (var i = 0; i < passwordSpecial; i++) {
+                thePassword += getRandom(special);
+            }
+            document.querySelector("#generated-password").innerHTML = shuffleString(thePassword);
+
+        }
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
