@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -19,6 +20,7 @@
         }
     </style>
 </head>
+
 <body>
     <!--Simple jumbotron to introduce purpose of the website-->
     <header class="jumbotron jumbotron-fluid text-center text-white" style="background-color:#00558D;">
@@ -36,7 +38,7 @@
                 <!--Bootstrap card-->
                 <div class="card" style="width: 100%;">
                     <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/13/1f/88/131f883b-2951-edf1-b8c2-d5a7acfe2ee9/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/1024x1024bb.png"
-                        class="card-img-top mx-auto" alt="Lock icon" style="max-width: 256px">
+                        class="card-img-top mx-auto" alt="Lock icon" style="max-width: 128px">
                     <div class="card-body">
                         <div class="text-center">
                             <p class="card-text">
@@ -80,9 +82,9 @@
                                 style="background-color:#054368;">
                                 Generate Password
                             </button>
-                            <pre><textarea readonly id="copy-message" style="text-align:center; border: none; margin: auto; width:100%; display: none" >Click or tap password to copy to clipboard!</textarea></pre>
-                            <pre><textarea readonly id="generated-password" style="text-align:center; border: none; margin: auto; width:100%" >Password must be between 8 and 128 characters</textarea></pre>
-                            <pre><textarea readonly id="copy-confirm" style="text-align:center; border: none; margin: auto; width:100%; display: none" >Password copied to clipboard!</textarea></pre>
+                            <pre><textarea readonly id="copy-message" style="text-align:center; border: none; margin: auto; width:100%; display: none; resize: none;" >Click or tap password to copy to clipboard!</textarea></pre>
+                            <pre><textarea readonly id="generated-password" style="text-align:center; border: none; margin: auto; width:100%; resize: none;" >Password must be between 8 and 128 characters</textarea></pre>
+                            <pre><textarea readonly id="copy-confirm" style="text-align:center; border: none; margin: auto; width:100%; display: none; resize: none;" >Password copied to clipboard!</textarea></pre>
                         </div>
                     </div>
                 </div>
@@ -127,4 +129,5 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

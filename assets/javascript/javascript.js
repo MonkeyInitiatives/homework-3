@@ -21,17 +21,23 @@ function passwordValidation(e) {
     // Check if the number is invalid, displaying a modal if the generate password button is clicked. 
     if ((passwordLength > 128 || passwordLength < 8) && e.type === 'click') {
         document.querySelector("#currentLength").innerHTML = `Your current password length is ${passwordLength}.`;
-        $('#exampleModal').modal("show");
+        // $('#exampleModal').modal("show");
         document.querySelector("#generated-password").innerHTML = "Password must be between 8 and 128 characters";
         document.querySelector("#copy-confirm").style.display = "none";
         document.querySelector("#copy-message").style.display = "none";
     }
     // Check if the password is invalid, clearing previously generated passwords using form inputs.
-    else if((passwordLength > 128 || passwordLength < 8) && e.type === 'input') {
+    else if ((passwordLength > 128 || passwordLength < 8) && e.type === 'input') {
+        // $('#exampleModal').modal("show");
         document.querySelector("#generated-password").innerHTML = "Password must be between 8 and 128 characters";
         document.querySelector("#copy-confirm").style.display = "none";
         document.querySelector("#copy-message").style.display = "none";
-
+    }
+    // Check if the password is invalid (not a number), clearing previously generated passwords using form inputs.
+    else if (isNaN(passwordLength)==true) {
+        document.querySelector("#generated-password").innerHTML = "Please enter values for each password criteria";
+        document.querySelector("#copy-confirm").style.display = "none";
+        document.querySelector("#copy-message").style.display = "none";
     }
     // The password is valid, and is now generated.
     else {
@@ -83,7 +89,7 @@ function generatePassword(passwordLowercase, passwordUppercase, passwordNumbers,
     document.querySelector("#generated-password").innerHTML = shuffleString(thePassword);
 }
 function copyToClipboard() {
-    if(passwordLength >= 8 && passwordLength <= 128){
+    if (passwordLength >= 8 && passwordLength <= 128) {
         /* Get the text field */
         var copyText = document.getElementById("generated-password");
         /* Select the text field */
@@ -94,9 +100,10 @@ function copyToClipboard() {
         /* Alert the copied text */
         document.querySelector("#copy-confirm").style.display = "block";
         /* Remove message after three seconds */
-        setTimeout(function(){ document.querySelector("#copy-confirm").style.display = "none"; }, 3000);
+        setTimeout(function () { document.querySelector("#copy-confirm").style.display = "none"; }, 3000);
+        window.location.href = '#copy-confirm';
     }
-    else{
+    else {
         document.querySelector("#copy-confirm").style.display = "none";
     }
 }
