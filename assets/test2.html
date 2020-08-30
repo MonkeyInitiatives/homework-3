@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .rose {
+            background-image: url("./assets/images/rose2.png");
+            height: 640px;
+            width: 480px;
+            background-size: cover;
+            -webkit-mask-box-image: url("./assets/images/rose2.png");
+            -webkit-mask-mode: alpha;
+            mask-image: url("./assets/images/rose2.png");
+            mask-mode: alpha;
+        }
+
+        .rose:hover {
+            background-blend-mode: lighten;
+            background-color: yellow;
+        }
+        .mycountainer{
+                       /* width: 640px;
+            height: 640px;
+            position: relative; */
+            margin: auto;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mycontainer">
+        <div class="rose">
+            <!-- <div id="colorOverlay" style=" background-color: #FF0000;"></div> -->
+            <!-- <img src="./assets/images/rose2.png"> -->
+        </div>
+    </div>
+</body>
+
+</html>

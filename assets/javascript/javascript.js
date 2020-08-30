@@ -34,7 +34,7 @@ function passwordValidation(e) {
         document.querySelector("#copy-message").style.display = "none";
     }
     // Check if the password is invalid (not a number), clearing previously generated passwords using form inputs.
-    else if (isNaN(passwordLength)==true) {
+    else if (isNaN(passwordLength) == true) {
         document.querySelector("#generated-password").innerHTML = "Please enter values for each password criteria";
         document.querySelector("#copy-confirm").style.display = "none";
         document.querySelector("#copy-message").style.display = "none";
@@ -87,6 +87,10 @@ function generatePassword(passwordLowercase, passwordUppercase, passwordNumbers,
     }
     // Shuffle the password and write it to the DOM.
     document.querySelector("#generated-password").innerHTML = shuffleString(thePassword);
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    document.getElementById("colorOverlay").style.backgroundColor = "#" + randomColor;
+    document.getElementById("myJumbotronOverlay").style.backgroundColor = "#" + randomColor;
+    document.getElementById("myButtonOverlay").style.backgroundColor = "#" + randomColor;
 }
 function copyToClipboard() {
     if (passwordLength >= 8 && passwordLength <= 128) {

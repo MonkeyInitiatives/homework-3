@@ -13,6 +13,49 @@
     <title>Password Generator</title>
     <!--Simple styling to hide jumbotron on mobile-->
     <style>
+        .rose {
+            width: 128px;
+            height: 128px;
+            position: relative;
+            margin: auto;
+            border-radius: 25px;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #myJumbotronOverlay,
+        #myButtonOverlay,
+        #colorOverlay {
+            padding: 0;
+            margin: 0;
+            border: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: hue;
+        }
+
+        #colorOverlay {
+            border-radius: 50%;
+        }
+
+        .myButton,
+        .myJumbotron {
+            /* padding-top: 0px; */
+            position: relative;
+        }
+
+        .myJumbotron {
+            padding-top: 0px;
+        }
+
         @media only screen and (max-width: 600px) {
             .jumbotron {
                 display: none;
@@ -23,7 +66,8 @@
 
 <body>
     <!--Simple jumbotron to introduce purpose of the website-->
-    <header class="jumbotron jumbotron-fluid text-center text-white" style="background-color:#00558D;">
+    <header class="jumbotron jumbotron-fluid text-center text-white myJumbotron" style="background-color: #1D4FAE;">
+        <div id="myJumbotronOverlay"></div>
         <div class="container">
             <h1 class="display-4 horizontal-center">Password Generator</h1>
             <p class="lead">1Password and LastPass are quaking in their boots!</p>
@@ -37,8 +81,10 @@
             <div class="col">
                 <!--Bootstrap card-->
                 <div class="card" style="width: 100%;">
-                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/13/1f/88/131f883b-2951-edf1-b8c2-d5a7acfe2ee9/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/1024x1024bb.png"
-                        class="card-img-top mx-auto" alt="Lock icon" style="max-width: 128px">
+                    <div class="rose">
+                        <div id="colorOverlay"></div>
+                        <img src="./assets/images/rose2.jpg" alt="rose security">
+                    </div>
                     <div class="card-body">
                         <div class="text-center">
                             <p class="card-text">
@@ -78,10 +124,13 @@
                         </div>
                         <!--Section where password button exists and generated password is displayed-->
                         <div class="text-center">
-                            <button type="button" class="btn text-center text-white" onclick="passwordValidation(event)"
-                                style="background-color:#054368;">
-                                Generate Password
-                            </button>
+                            <div class="myButton">
+                                <div id="myButtonOverlay"></div>
+                                <button type="button" class="btn text-center text-white"
+                                    onclick="passwordValidation(event)" style="background-color:#1D4FAE;">
+                                    Generate Password
+                                </button>
+                            </div>
                             <pre><textarea readonly id="copy-message" style="text-align:center; border: none; margin: auto; width:100%; display: none; resize: none;" >Click or tap password to copy to clipboard!</textarea></pre>
                             <pre><textarea readonly id="generated-password" style="text-align:center; border: none; margin: auto; width:100%; resize: none;" >Password must be between 8 and 128 characters</textarea></pre>
                             <pre><textarea readonly id="copy-confirm" style="text-align:center; border: none; margin: auto; width:100%; display: none; resize: none;" >Password copied to clipboard!</textarea></pre>
